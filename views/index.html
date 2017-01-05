@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="en" ng-app="tunely">
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,14 +19,27 @@
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
 
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="jumbotron">
-      <div class="container">
-        <h1>Welcome to tunely</h1>
-        <p>Your music binder!</p>
-      </div>
+        <div class="container">
+            <h1>Welcome to tunely</h1>
+            <p>Your music binder!</p>
+        </div>
     </div>
-  </body>
+    <div class="container" ng-controller="AlbumsIndexController as albumsIndexCtrl">
+        <p><b>albumsIndexCtrl.newAlbum:</b> {{albumsIndexCtrl.newAlbum}}</p>
+        <input type="text" class="form-control" placeholder="New album name" ng-model="albumsIndexCtrl.newAlbum.name">
+        <input type="text" class="form-control" placeholder="New album artist" ng-model="albumsIndexCtrl.newAlbum.artistName">
+
+        <div ng-repeat="album in albumsIndexCtrl.albums | orderBy: 'name' | filter: searchArtist">
+            <p><b>{{album.name}}</b> - {{album.artistName}}</p>
+
+        </div>
+        <input type="text" class="form-control" placeholder="filter by artist name" ng-model="searchArtist">
+    </div>
+
+</body>
 
 </html>
