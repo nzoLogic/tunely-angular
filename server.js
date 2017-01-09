@@ -10,16 +10,12 @@ var bodyParser = require('body-parser');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 // need to add this so that we can accept request payloads from Angular
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 
 // We'll serve jQuery and bootstrap from a local bower cache avoiding CDNs
 // We're placing these under /vendor to differentiate them from our own assets
 app.use('/vendor', express.static(__dirname + '/bower_components'));
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7716c9be75d1f293ce36d0b886d6a5fc43ea47aa
 var controllers = require('./controllers');
 
 
@@ -64,10 +60,7 @@ app.post('/api/albums/:albumId/songs', controllers.albumsSongs.create);
 app.delete('/api/albums/:albumId/songs/:songId', controllers.albumsSongs.destroy);
 app.put('/api/albums/:albumId/songs/:songId', controllers.albumsSongs.update);
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 7716c9be75d1f293ce36d0b886d6a5fc43ea47aa
 // ALL OTHER ROUTES (ANGULAR HANDLES)
 // redirect all other paths to index
 app.get('*', function homepage (req, res) {
