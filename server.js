@@ -16,7 +16,10 @@ app.use(bodyParser.json());
 // We're placing these under /vendor to differentiate them from our own assets
 app.use('/vendor', express.static(__dirname + '/bower_components'));
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7716c9be75d1f293ce36d0b886d6a5fc43ea47aa
 var controllers = require('./controllers');
 
 
@@ -37,6 +40,13 @@ app.get('/templates/:name', function templates(req, res) {
   res.sendFile(__dirname + '/views/templates/' + name + '.html');
 });
 
+app.get('/templates/:name', function templates(req, res) {
+  var name = req.params.name;
+  res.sendFile(__dirname + '/views/templates/' + name + '.html');
+});
+
+
+
 /*
  * JSON API Endpoints
  */
@@ -54,6 +64,10 @@ app.post('/api/albums/:albumId/songs', controllers.albumsSongs.create);
 app.delete('/api/albums/:albumId/songs/:songId', controllers.albumsSongs.destroy);
 app.put('/api/albums/:albumId/songs/:songId', controllers.albumsSongs.update);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7716c9be75d1f293ce36d0b886d6a5fc43ea47aa
 // ALL OTHER ROUTES (ANGULAR HANDLES)
 // redirect all other paths to index
 app.get('*', function homepage (req, res) {

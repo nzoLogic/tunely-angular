@@ -22,8 +22,12 @@ This sprint we will:
       url: '/api/albums/'+ album._id
     }).then(function successCallback(json) {
       var index = vm.albums.indexOf(album);
+<<<<<<< HEAD
       console.log("index is: " + index);
       vm.albums.splice(index,1)
+=======
+      vm.albums.splice(index, 1);
+>>>>>>> 7716c9be75d1f293ce36d0b886d6a5fc43ea47aa
     }, function errorCallback(response) {
       console.log('There was an error deleting the data', response);
     });
