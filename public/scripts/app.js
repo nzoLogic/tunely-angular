@@ -8,7 +8,7 @@ angular
   .module('tunely', ['ngRoute'])
   .config(config);
 
-config.$inject = ['$routeProvider', '$locationProvider', '$interpolateProvider',];
+config.$inject = ['$routeProvider', '$locationProvider', '$interpolateProvider'];
 
 function config ($routeProvider, $locationProvider, $interpolateProvider) {
   $routeProvider

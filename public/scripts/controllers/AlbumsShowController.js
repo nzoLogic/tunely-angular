@@ -13,6 +13,23 @@ function AlbumsShowController($http, $routeParams, $sce) {
     var type = '&type=album';
     vm.newSong = {};
     vm.album = {};
+///initial get request for album
+    $http({
+        method: 'GET',
+        url: '/api/albums/' + $routeParams.id
+    }).then(function successCallback(json) {
+        vm.album = json.data;
+        if(vm.album.uri && vm.album.image){
+          vm.album.uri = $sce.trustAsResourceUrl(vm.album.uri);
+          vm.album.image = $sce.trustAsResourceUrl(vm.album.image);
+        }
+        else if(!vm.album.uri || !vm.album.image) {
+          vm.getSpotifyAlbum();
+        }
+
+    }, function errorCallback(response) {
+        console.log('There was an error getting the data', response);
+    });
 
     vm.deleteSong = function(song) {
         var index = vm.album.songs.indexOf(song);
@@ -53,29 +70,31 @@ function AlbumsShowController($http, $routeParams, $sce) {
             vm.album.songs.push(res.data);
         })
     }
-    $http({
-        method: 'GET',
-        url: '/api/albums/' + $routeParams.id
-    }).then(function successCallback(json) {
-        vm.album = json.data;
-        $http({
-            method: 'GET',
-            url: spotifyUrl + vm.album.name + type,
-        }).then(function(res) {
-          var topPick = res.data.albums.items[0];
-            console.log(topPick)
-            var trustUrl = spotifyEmbed +
-            topPick.uri + userName;
-            //set album.uri equal to trust url
-            vm.album.uri = $sce.trustAsResourceUrl(trustUrl);
-            vm.album.image = $sce.trustAsResourceUrl(topPick.images[1].url);
-            console.log(vm.album)
-        }, function(err) {
-            console.log('err');
-        })
+    //function for gettting spotify album if album doesnt have one
+    vm.getSpotifyAlbum = function(){
+      $http({
+          method: 'GET',
+          url: spotifyUrl + vm.album.name + type,
+      }).then(function succesfulSpotify(res) {
+        var topPick = res.data.albums.items[0];
+          console.log(topPick);
+          //update album to be used in put route
+        console.log(vm.album)
+          var trustUrl = spotifyEmbed +
+          topPick.uri + userName;
+          // set album.uri and updateAlbum equal to trust url
+          vm.album.uri = $sce.trustAsResourceUrl(trustUrl);
+          vm.album.image = $sce.trustAsResourceUrl(topPick.images[1].url);
 
-    }, function errorCallback(response) {
-        console.log('There was an error getting the data', response);
-    });
+          // $http({
+          //   method: 'PUT',
+          //   url: '/api/albums/'+vm.album._id,
+          //   data: updateAlbum
+          // }).then(function(res){console.log(res)});
+      }, function(err) {
+          console.log('err');
+      })
+    }
+
 
 }

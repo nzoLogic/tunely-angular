@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
 
-      <form class="form-horizontal" ng-submit="albumsIndexCtrl.createAlbum()">
+      <form class="form-horizontal" ng-submit="albumsIndexCtrl.getSpotify()">
         <fieldset>
 
           <!-- Form Name -->
@@ -61,7 +61,7 @@
 
           <div class='row'>
             <div class="col-md-3 col-xs-12 thumbnail">
-              <img src="images/800x800.png" alt="album image">
+              <img src="/images/800x800.png" ng-src="{{album.image}}" alt="album image">
             </div>
 
             <div class="col-md-9 col-xs-12">
@@ -90,6 +90,7 @@
           <div class='panel-footer'>
             <div class='panel-footer'>
               <button class='btn btn-danger' ng-click="albumsIndexCtrl.deleteAlbum(album)">Delete Album</button>
+              <!-- <button class='btn btn-danger' ng-click="albumsIndexCtrl.addSpotify(album)">Delete Album</button> -->
               <button class='btn btn-info' ng-hide="editing" ng-click="editing = true">Edit Album</button>
               <button class='btn btn-success' ng-show="editing" ng-click="albumsIndexCtrl.editAlbum(album); editing = false">Save Changes</button>
             </div>
