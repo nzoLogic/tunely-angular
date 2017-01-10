@@ -2,9 +2,9 @@ angular
     .module('tunely')
     .controller('AlbumsShowController', AlbumsShowController);
 
-AlbumsShowController.$inject = ['$http', '$routeParams'];
+AlbumsShowController.$inject = ['$http', '$routeParams', '$sce'];
 
-function AlbumsShowController($http, $routeParams) {
+function AlbumsShowController($http, $routeParams, $sce) {
     var url = '/api/albums/' + $routeParams.id + '/songs/';
     var vm = this,
         spotifyUrl = 'https://api.spotify.com/v1/search?q=album:';
@@ -13,6 +13,7 @@ function AlbumsShowController($http, $routeParams) {
     var type = '&type=album';
     vm.newSong = {};
     vm.album = {};
+
     vm.deleteSong = function(song) {
         var index = vm.album.songs.indexOf(song);
         console.log(index);
@@ -62,8 +63,9 @@ function AlbumsShowController($http, $routeParams) {
             url: spotifyUrl + vm.album.name + type,
         }).then(function(res) {
             console.log(res.data.albums.items[0])
-            vm.album.uri = spotifyEmbed +
-            res.data.albums.items[0].uri + userName ;
+            var trustUrl = spotifyEmbed +
+            res.data.albums.items[0].uri + userName;
+            vm.album.uri = $sce.trustAsResourceUrl(trustUrl);
             console.log(vm.album.uri)
         }, function(err) {
             console.log('err');

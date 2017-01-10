@@ -2,7 +2,7 @@ angular
   .module('tunely')
   .controller('AlbumsIndexController', AlbumsIndexController);
 
-AlbumsIndexController.$inject = ['$http'];
+AlbumsIndexController.$inject = ['$http', '$scope'];
 
 function AlbumsIndexController ($http) {
   var vm = this;
@@ -11,7 +11,7 @@ function AlbumsIndexController ($http) {
     name: 'Viva Hate',
     artistName: 'Morrissey'
   };
-
+  
   $http({
     method: 'GET',
     url: '/api/albums'

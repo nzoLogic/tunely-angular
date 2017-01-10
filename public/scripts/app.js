@@ -8,9 +8,9 @@ angular
   .module('tunely', ['ngRoute'])
   .config(config);
 
-config.$inject = ['$routeProvider', '$locationProvider'];
+config.$inject = ['$routeProvider', '$locationProvider', '$interpolateProvider',];
 
-function config ($routeProvider, $locationProvider) {
+function config ($routeProvider, $locationProvider, $interpolateProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '/templates/albums',

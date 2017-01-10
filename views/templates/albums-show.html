@@ -26,11 +26,9 @@
                       <h4 class='inline-header'>Released date:</h4>
                       <span>{{albumsShowCtrl.album.releaseDate}}</span>
                     </li>
+
                     <li class="list-group-item">
-                      <button class="btn" ng-click=" play=true;">Play</button>
-                    </li>
-                    <li class="list-group-item">
-                      <iframe ng-hide="!play" src="https://embed.spotify.com/?uri=spotify:album:6wZgpIgQWZzq8qKJrU7ELd&user:129721589"
+                      <iframe ng-src="{{albumsShowCtrl.album.uri}}"
                        width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
                     </li>
                     <li class="list-group-item">
