@@ -62,11 +62,14 @@ function AlbumsShowController($http, $routeParams, $sce) {
             method: 'GET',
             url: spotifyUrl + vm.album.name + type,
         }).then(function(res) {
-            console.log(res.data.albums.items[0])
+          var topPick = res.data.albums.items[0];
+            console.log(topPick)
             var trustUrl = spotifyEmbed +
-            res.data.albums.items[0].uri + userName;
+            topPick.uri + userName;
+            //set album.uri equal to trust url
             vm.album.uri = $sce.trustAsResourceUrl(trustUrl);
-            console.log(vm.album.uri)
+            vm.album.image = $sce.trustAsResourceUrl(topPick.images[1].url);
+            console.log(vm.album)
         }, function(err) {
             console.log('err');
         })
