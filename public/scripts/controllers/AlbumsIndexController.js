@@ -25,7 +25,7 @@ function AlbumsIndexController ($http) {
     $http({
       method: 'POST',
       url: '/api/albums',
-      data: vm.newAlbum,
+      data: vm.newAlbum
     }).then(function successCallback(response) {
       vm.albums.push(response.data);
     }, function errorCallback(response) {
